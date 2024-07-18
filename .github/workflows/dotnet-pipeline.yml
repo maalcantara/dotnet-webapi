@@ -26,3 +26,12 @@ jobs:
 
     - name: Build the project
       run: dotnet build --configuration Release
+
+    - name: Publish the project
+      run: dotnet publish --configuration Release --output ./publish
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: dotnet-app
+        path: ./publish
