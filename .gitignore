@@ -8,6 +8,7 @@ obj/
 /wwwroot/node_modules
 
 # Config files
+*.json
 *.csproj
 *.csproj.user
 *.http
