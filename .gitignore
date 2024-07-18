@@ -9,6 +9,5 @@ obj/
 
 # Config files
 *.json
-*.csproj
 *.csproj.user
 *.http
