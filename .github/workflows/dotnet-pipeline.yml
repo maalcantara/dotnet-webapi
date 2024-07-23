@@ -24,6 +24,12 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
+    - name: Install dotnet-format
+      run: dotnet tool install --global dotnet-format
+
+    - name: Run dotnet-format
+      run: dotnet format --check
+
     - name: Build the project
       run: dotnet build --configuration Release
 
