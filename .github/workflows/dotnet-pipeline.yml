@@ -27,8 +27,11 @@ jobs:
     - name: Install dotnet-format
       run: dotnet tool install --global dotnet-format
 
-    - name: Run dotnet-format
-      run: dotnet format --check
+    - name: Run dotnet-format in csproj
+      run: dotnet format ./dotnet-webapi/dotnet-webapi.csproj
+
+    - name: Run dotnet-format in solution - sln
+      run: dotnet format ./dotnet-webapi/dotnet-webapi.sln
 
     - name: Build the project
       run: dotnet build --configuration Release
