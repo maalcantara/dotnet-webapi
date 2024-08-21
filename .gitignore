@@ -11,3 +11,5 @@ obj/
 *.json
 *.csproj.user
 *.http
+*.csproj
+*.sln
