@@ -22,7 +22,7 @@ jobs:
 
     - name: Setup .NET Core SDK
       # reusable workflow
-      uses: maalcantara/reusable_workflows/.github/workflows/setup-dotnet-sdk.yml@main
+      uses: maalcantara/reusable_workflow/.github/workflows/setup-dotnet-sdk.yml@main
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
