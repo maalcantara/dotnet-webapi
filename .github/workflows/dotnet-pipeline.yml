@@ -7,36 +7,36 @@ on:
   pull_request:
     branches:
       - main
-  workflow_dispatch: #comando que permite a execução manual do pipeline
+  workflow_dispatch: # comando que permite a execução manual do pipeline
 
 jobs:
+  setup-dotnet-sdk:
+    uses: maalcantara/reusable_workflow/.github/workflows/setup-dotnet-sdk.yml@main
+    with:
+      dotnet-version: '8.0.x'
+
   build:
     runs-on: ubuntu-latest
+    needs: setup-dotnet-sdk
 
     env:
       DOTNET_VERSION: '8.0.x'
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Setup .NET Core SDK
-      # reusable workflow
-      uses: maalcantara/reusable_workflow/.github/workflows/setup-dotnet-sdk.yml@main
-      with:
-        dotnet-version: ${{ env.DOTNET_VERSION }}
+      - name: Install dotnet-format
+        run: dotnet tool install --global dotnet-format
 
-    - name: Install dotnet-format
-      run: dotnet tool install --global dotnet-format
+      - name: Build the project
+        run: dotnet build --configuration Release
 
-    - name: Build the project
-      run: dotnet build --configuration Release
+      - name: Publish the project
+        run: dotnet publish --configuration Release --output ./publish
 
-    - name: Publish the project
-      run: dotnet publish --configuration Release --output ./publish
-
-    - name: Upload artifact
-      uses: actions/upload-artifact@v3
-      with:
-        name: dotnet-app
-        path: ./publish
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: dotnet-app
+          path: ./publish
